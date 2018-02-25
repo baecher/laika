@@ -90,7 +90,7 @@ $ make install
 Build continuously the server and UI with:
 
 ```sh
-$ make watch
+$ make develop
 ```
 
 And start hacking!
