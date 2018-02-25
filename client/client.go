@@ -3,6 +3,7 @@ package client
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
 	"net/url"
 	"time"
@@ -60,7 +61,8 @@ func NewClient(conf Config) (Client, error) {
 		return nil, err
 	}
 
-	endpoint, err := url.Parse("/api/features")
+	endpoint, err := url.Parse(
+		fmt.Sprintf("/api/environments/%s/features", url.QueryEscape(conf.Environment)))
 	if err != nil {
 		return nil, err
 	}
@@ -115,7 +117,7 @@ func (c *client) poll() error {
 		return errors.New(e.Message)
 	}
 
-	features := []*Feature{}
+	rawFeatures := map[string]int{}
 	if err := json.NewDecoder(res.Body).Decode(&features); err != nil {
 		return err
 	}
