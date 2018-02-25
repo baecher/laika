@@ -24,3 +24,17 @@ func (r *EnvironmentResource) List(c echo.Context) error {
 
 	return OK(c, s.Environments)
 }
+
+func (r *EnvironmentResource) GetEnabled(c echo.Context) error {
+	s, err := r.store.State()
+	if err != nil {
+		return InternalServerError(c, err)
+	}
+
+	features := s.GetEnabledFeatures(c.Param("name"))
+	if features == nil {
+		return NotFound(c)
+	}
+
+	return OK(c, features)
+}

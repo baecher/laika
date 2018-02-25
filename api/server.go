@@ -62,6 +62,7 @@ func NewServer(conf ServerConfig) (*standard.Server, error) {
 	api.GET("/features", features.List)
 
 	api.GET("/environments", environments.List)
+	api.GET("/environments/:name/enabled", environments.GetEnabled)
 	api.GET("/*", func(c echo.Context) error { return NotFound(c) })
 
 	e.Static("/static", "public")

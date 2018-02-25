@@ -12,12 +12,13 @@ Using Laika in a project thus allows for fast and continuous feature release and
 
 Laika uses CQRS, the query endpoints are as follows.
 
-| Method  | Endpoint                  | Description                |
-| ------- | ------------------------- | -------------------------- |
-| `GET`   | `/api/health`             | Check the service health   |
-| `GET`   | `/api/features`           | List all features          |
-| `GET`   | `/api/features/:name`     | Get a feature by name      |
-| `GET`   | `/api/environments`       | List all environments      |
+| Method  | Endpoint                              | Description                  |
+| ------- | ------------------------------------- | ---------------------------- |
+| `GET`   | `/api/health`                         | Check the service health     |
+| `GET`   | `/api/features`                       | List all features            |
+| `GET`   | `/api/features/:name`                 | Get a feature by name        |
+| `GET`   | `/api/environments`                   | List all environments        |
+| `GET`   | `/api/environments/:name/enabled`     | List enabled features in env |
 
 The command endpoint is for manipulating data.
 
