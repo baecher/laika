@@ -42,6 +42,25 @@ func NewState() *State {
 
 }
 
+func (s *State) GetFeatures(env string) map[string]int {
+	if s.getEnvByName(env) == nil {
+		return nil
+	}
+
+	features := map[string]int{}
+
+	for _, feature := range s.Features {
+		ok, status := s.Enabled[EnvFeature{env, feature.Name}]
+		if ok && status {
+			features[feature.Name] = 1
+		} else {
+			features[feature.Name] = 0
+		}
+	}
+
+	return features
+}
+
 func (s *State) getFeatureByName(name string) *Feature {
 	for _, feature := range s.Features {
 		if feature.Name == name {
